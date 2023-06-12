@@ -71,6 +71,11 @@ func main() {
 
 			p := message.NewPrinter(language.English)
 			tvl, err := GetTVL(*protocol)
+			if err != nil {
+				log.Println(err)
+				continue
+			}
+
 			var fmtTVL string
 			switch {
 			case tvl < 1000000:
