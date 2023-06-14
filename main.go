@@ -13,7 +13,7 @@ import (
 	"golang.org/x/text/message"
 )
 
-var token, protocol, activity, metrics *string
+var token, protocol, header, activity, metrics *string
 var nickname *bool
 var refresh *int
 var updates prometheus.Counter
@@ -22,6 +22,7 @@ func init() {
 	token = flag.String("token", "", "discord bot token")
 	protocol = flag.String("protocol", "", "protocol to get tvl for")
 	nickname = flag.Bool("nickname", true, "set data in nickname")
+	header = flag.String("header", "", "text before data in nickname")
 	activity = flag.String("activity", "", "bot activity")
 	refresh = flag.Int("refresh", 300, "seconds between refresh")
 	metrics = flag.String("metrics", ":8080", "address for prometheus metric serving")
@@ -79,13 +80,13 @@ func main() {
 			var fmtTVL string
 			switch {
 			case tvl < 1000000:
-				fmtTVL = p.Sprintf("$%.2fk", tvl/1000)
+				fmtTVL = p.Sprintf("%s$%.2fk", *header, tvl/1000)
 			case tvl < 1000000000:
-				fmtTVL = p.Sprintf("$%.2fM", tvl/1000000)
+				fmtTVL = p.Sprintf("%s$%.2fM", *header, tvl/1000000)
 			case tvl < 1000000000000:
-				fmtTVL = p.Sprintf("$%.2fB", tvl/1000000000)
+				fmtTVL = p.Sprintf("%s$%.2fB", *header, tvl/1000000000)
 			case tvl < 1000000000000000:
-				fmtTVL = p.Sprintf("$%.2fT", tvl/1000000000000)
+				fmtTVL = p.Sprintf("%s$%.2fT", *header, tvl/1000000000000)
 			}
 
 			if *nickname {

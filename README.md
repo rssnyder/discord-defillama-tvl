@@ -6,6 +6,8 @@ a simple discord bot that just changes its nickname and/or status
 
 ![GitHub all releases](https://img.shields.io/github/downloads/rssnyder/discord-bot/total?style=flat-square)
 
+want this in your server? messages @jonesbooned for details.
+
 ```text
 Usage of ./discord-bot:
   -activity string
