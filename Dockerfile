@@ -11,4 +11,4 @@ COPY *.go ./
 
 RUN go build -o /discord-bot
 
-ENTRYPOINT /discord-bot -token "$TOKEN" -nickname "$NICKNAME" -activity "$ACTIVITY" -status "$STATUS" -refresh "$REFRESH"
+ENTRYPOINT /discord-bot -token "$TOKEN" -protocol "$PROTOCOL" -nickname "$NICKNAME" -activity "$ACTIVITY" -status "$STATUS" -refresh "$REFRESH"
